@@ -6,7 +6,7 @@
 
 **ProConnect** is a modern, full-stack booking platform that connects clients with world-class professionals for 1-on-1 consultation sessions. Built with React, Express, and featuring a beautiful UI powered by Tailwind CSS and Framer Motion.
 
-![ProConnect Homepage](https://via.placeholder.com/1200x600/4F46E5/ffffff?text=ProConnect+-+Connect+with+the+Best)
+
 
 ## ✨ Features
 

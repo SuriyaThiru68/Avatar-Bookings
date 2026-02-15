@@ -122,7 +122,7 @@
 
 ```
 proconnect/
-├── client/                 # Frontend React application
+├── client/                 # Frontend React
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
 │   │   ├── contexts/       # React contexts (Auth, etc.)

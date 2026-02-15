@@ -1,0 +1,59 @@
+{
+    "name": "ProConnect - Connect with the Best",
+    "short_name": "ProConnect",
+    "description": "Book 1-on-1 sessions with world-class professionals. Expert guidance whenever you need it.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4F46E5",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.svg",
+            "sizes": "200x200",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "/apple-touch-icon.svg",
+            "sizes": "180x180",
+            "type": "image/svg+xml"
+        }
+    ],
+    "categories": [
+        "business",
+        "productivity",
+        "lifestyle"
+    ],
+    "shortcuts": [
+        {
+            "name": "Find Experts",
+            "short_name": "Experts",
+            "description": "Browse available professionals",
+            "url": "/#experts",
+            "icons": [
+                {
+                    "src": "/favicon.svg",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "My Bookings",
+            "short_name": "Bookings",
+            "description": "View your bookings",
+            "url": "/bookings",
+            "icons": [
+                {
+                    "src": "/favicon.svg",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}

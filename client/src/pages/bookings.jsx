@@ -217,7 +217,7 @@ export default function BookingsPage() {
                                         <Download className="w-4 h-4 mr-2" />
                                         Receipt
                                     </Button>
-                                    <Button size="sm">
+                                    <Button size="sm" onClick={() => setLocation('/')}>
                                         Rebook
                                     </Button>
                                 </>
@@ -247,7 +247,7 @@ export default function BookingsPage() {
                             <h1 className="text-3xl font-black text-slate-900 mt-4">My Bookings</h1>
                             <p className="text-slate-600 mt-1">Manage your consultation sessions</p>
                         </div>
-                        <Button>
+                        <Button onClick={() => setLocation('/')}>
                             <Calendar className="w-4 h-4 mr-2" />
                             New Booking
                         </Button>

@@ -78,9 +78,9 @@ export default function Home() {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#experts" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Find Experts</a>
-            <a href="#how" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">How it Works</a>
-            <a href="#business" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">For Business</a>
+            <button onClick={() => document.getElementById('experts')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Find Experts</button>
+            <button onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">How it Works</button>
+            <button onClick={() => document.getElementById('business')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">For Business</button>
           </div>
 
           <div className="flex items-center gap-4">
@@ -175,7 +175,7 @@ export default function Home() {
                     className="border-none shadow-none focus-visible:ring-0 bg-transparent text-lg h-12 w-full"
                   />
                 </div>
-                <Button className="h-12 rounded-2xl sm:rounded-full px-10 text-lg font-bold shadow-lg shadow-primary/30">
+                <Button onClick={() => document.getElementById('experts')?.scrollIntoView({ behavior: 'smooth' })} className="h-12 rounded-2xl sm:rounded-full px-10 text-lg font-bold shadow-lg shadow-primary/30">
                   Search Experts
                 </Button>
               </div>
@@ -254,7 +254,7 @@ export default function Home() {
           </div>
 
           <div className="mt-20 text-center">
-            <Button variant="ghost" className="text-primary font-black text-lg group">
+            <Button onClick={() => window.scrollTo({ top: document.getElementById('experts')?.offsetTop - 100, behavior: 'smooth' })} variant="ghost" className="text-primary font-black text-lg group">
               View All 250+ Experts <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
@@ -275,10 +275,10 @@ export default function Home() {
               Join thousands of people who are already growing with our elite professional network.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="h-16 px-12 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/40">
+              <Button onClick={() => setLocation('/auth')} size="lg" className="h-16 px-12 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/40">
                 Get Started for Free
               </Button>
-              <Button size="lg" variant="outline" className="h-16 px-12 text-xl font-bold rounded-2xl border-white/20 text-white hover:bg-white/5 transition-all">
+              <Button onClick={() => document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' })} size="lg" variant="outline" className="h-16 px-12 text-xl font-bold rounded-2xl border-white/20 text-white hover:bg-white/5 transition-all">
                 Talk to Sales
               </Button>
             </div>
@@ -310,20 +310,20 @@ export default function Home() {
             <div>
               <h4 className="font-bold text-slate-900 mb-6 uppercase tracking-widest text-xs">Platform</h4>
               <ul className="space-y-4 text-sm font-medium text-slate-500">
-                <li><a href="#" className="hover:text-primary">Find Experts</a></li>
-                <li><a href="#" className="hover:text-primary">How it Works</a></li>
-                <li><a href="#" className="hover:text-primary">Pricing</a></li>
-                <li><a href="#" className="hover:text-primary">Mobile App</a></li>
+                <li><button onClick={() => document.getElementById('experts')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Find Experts</button></li>
+                <li><button onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">How it Works</button></li>
+                <li><button onClick={() => setLocation('/auth')} className="hover:text-primary transition-colors">Pricing</button></li>
+                <li><button onClick={() => setLocation('/auth')} className="hover:text-primary transition-colors">Mobile App</button></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-bold text-slate-900 mb-6 uppercase tracking-widest text-xs">Company</h4>
               <ul className="space-y-4 text-sm font-medium text-slate-500">
-                <li><a href="#" className="hover:text-primary">About Us</a></li>
-                <li><a href="#" className="hover:text-primary">Careers</a></li>
-                <li><a href="#" className="hover:text-primary">Success Stories</a></li>
-                <li><a href="#" className="hover:text-primary">Contact</a></li>
+                <li><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-primary transition-colors">About Us</button></li>
+                <li><button onClick={() => setLocation('/auth')} className="hover:text-primary transition-colors">Careers</button></li>
+                <li><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-primary transition-colors">Success Stories</button></li>
+                <li><button onClick={() => document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Contact</button></li>
               </ul>
             </div>
 
@@ -342,9 +342,9 @@ export default function Home() {
           <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-sm font-medium text-slate-400">© 2026 ProConnect Inc. All rights reserved.</p>
             <div className="flex gap-8 text-sm font-medium text-slate-400">
-              <a href="#" className="hover:text-slate-900">Privacy Policy</a>
-              <a href="#" className="hover:text-slate-900">Terms of Service</a>
-              <a href="#" className="hover:text-slate-900">Cookie Settings</a>
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Privacy Policy</button>
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Terms of Service</button>
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Cookie Settings</button>
             </div>
           </div>
         </div>

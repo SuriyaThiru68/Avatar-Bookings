@@ -19,7 +19,13 @@ import {
     Video,
     CheckCircle2,
     XCircle,
-    Clock3
+    Clock3,
+    X,
+    CalendarClock,
+    Phone,
+    Mail,
+    FileText,
+    StarOff
 } from 'lucide-react';
 
 export default function BookingsPage() {
@@ -198,34 +204,62 @@ export default function BookingsPage() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                         <span className="text-lg font-bold text-primary">{booking.price}</span>
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2">
                             {booking.status === 'upcoming' && (
                                 <>
-                                    <Button size="sm" variant="outline">
-                                        <MessageSquare className="w-4 h-4 mr-2" />
-                                        Message
+                                    <Button size="sm" variant="outline" title="Send Message">
+                                        <MessageSquare className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Message</span>
                                     </Button>
-                                    <Button size="sm">
-                                        <Video className="w-4 h-4 mr-2" />
-                                        Join Session
+                                    <Button size="sm" variant="outline" title="Call Professional">
+                                        <Phone className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Call</span>
+                                    </Button>
+                                    <Button size="sm" className="bg-green-600 hover:bg-green-700" title="Join Video Session">
+                                        <Video className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Join</span>
+                                    </Button>
+                                    <Button size="sm" variant="outline" title="Reschedule Booking">
+                                        <CalendarClock className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Reschedule</span>
+                                    </Button>
+                                    <Button size="sm" variant="destructive" title="Cancel Booking">
+                                        <X className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Cancel</span>
                                     </Button>
                                 </>
                             )}
                             {booking.status === 'completed' && (
                                 <>
-                                    <Button size="sm" variant="outline">
-                                        <Download className="w-4 h-4 mr-2" />
-                                        Receipt
+                                    <Button size="sm" variant="outline" title="Download Receipt">
+                                        <Download className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Receipt</span>
                                     </Button>
-                                    <Button size="sm" onClick={() => setLocation('/')}>
+                                    <Button size="sm" variant="outline" title="View Session Notes">
+                                        <FileText className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Notes</span>
+                                    </Button>
+                                    {!booking.rating && (
+                                        <Button size="sm" variant="outline" className="text-amber-600 hover:text-amber-700" title="Leave a Review">
+                                            <Star className="w-4 h-4 mr-1" />
+                                            <span className="hidden sm:inline">Review</span>
+                                        </Button>
+                                    )}
+                                    <Button size="sm" onClick={() => setLocation('/')} title="Book Again">
                                         Rebook
                                     </Button>
                                 </>
                             )}
                             {booking.status === 'cancelled' && (
-                                <Button size="sm" variant="outline">
-                                    View Details
-                                </Button>
+                                <>
+                                    <Button size="sm" variant="outline" title="View Cancellation Details">
+                                        <FileText className="w-4 h-4 mr-1" />
+                                        <span className="hidden sm:inline">Details</span>
+                                    </Button>
+                                    <Button size="sm" onClick={() => setLocation('/')} title="Book New Session">
+                                        Book Again
+                                    </Button>
+                                </>
                             )}
                         </div>
                     </div>

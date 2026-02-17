@@ -321,27 +321,67 @@ export default function BookingsPage() {
                     </TabsList>
 
                     <TabsContent value="all" className="space-y-4">
-                        {filterBookings('all').map(booking => (
-                            <BookingCard key={booking.id} booking={booking} />
-                        ))}
+                        {filterBookings('all').length === 0 ? (
+                            <div className="text-center py-20">
+                                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Search className="w-8 h-8 text-slate-400" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">No bookings found</h3>
+                                <p className="text-slate-500">Try adjusting your search terms</p>
+                            </div>
+                        ) : (
+                            filterBookings('all').map(booking => (
+                                <BookingCard key={booking.id} booking={booking} />
+                            ))
+                        )}
                     </TabsContent>
 
                     <TabsContent value="upcoming" className="space-y-4">
-                        {filterBookings('upcoming').map(booking => (
-                            <BookingCard key={booking.id} booking={booking} />
-                        ))}
+                        {filterBookings('upcoming').length === 0 ? (
+                            <div className="text-center py-20">
+                                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Search className="w-8 h-8 text-slate-400" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">No upcoming bookings found</h3>
+                                <p className="text-slate-500">Try adjusting your search terms</p>
+                            </div>
+                        ) : (
+                            filterBookings('upcoming').map(booking => (
+                                <BookingCard key={booking.id} booking={booking} />
+                            ))
+                        )}
                     </TabsContent>
 
                     <TabsContent value="completed" className="space-y-4">
-                        {filterBookings('completed').map(booking => (
-                            <BookingCard key={booking.id} booking={booking} />
-                        ))}
+                        {filterBookings('completed').length === 0 ? (
+                            <div className="text-center py-20">
+                                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Search className="w-8 h-8 text-slate-400" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">No completed bookings found</h3>
+                                <p className="text-slate-500">Try adjusting your search terms</p>
+                            </div>
+                        ) : (
+                            filterBookings('completed').map(booking => (
+                                <BookingCard key={booking.id} booking={booking} />
+                            ))
+                        )}
                     </TabsContent>
 
                     <TabsContent value="cancelled" className="space-y-4">
-                        {filterBookings('cancelled').map(booking => (
-                            <BookingCard key={booking.id} booking={booking} />
-                        ))}
+                        {filterBookings('cancelled').length === 0 ? (
+                            <div className="text-center py-20">
+                                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Search className="w-8 h-8 text-slate-400" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">No cancelled bookings found</h3>
+                                <p className="text-slate-500">Try adjusting your search terms</p>
+                            </div>
+                        ) : (
+                            filterBookings('cancelled').map(booking => (
+                                <BookingCard key={booking.id} booking={booking} />
+                            ))
+                        )}
                     </TabsContent>
                 </Tabs>
             </div>

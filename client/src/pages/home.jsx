@@ -64,6 +64,7 @@ const STATS = [
 export default function Home() {
   const [, setLocation] = useLocation();
   const { user, logout } = useAuth();
+  const [searchQuery, setSearchQuery] = React.useState('');
 
   return (
     <div className="min-h-screen bg-white">
@@ -172,6 +173,8 @@ export default function Home() {
                   <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
                   <Input
                     placeholder="Search by role, name or specialty..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="border-none shadow-none focus-visible:ring-0 bg-transparent text-lg h-12 w-full"
                   />
                 </div>
@@ -240,17 +243,41 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {PROFESSIONALS.map((professional, index) => (
-              <motion.div
-                key={professional.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-              >
-                <AvatarCard professional={professional} />
-              </motion.div>
-            ))}
+            {(() => {
+              const filteredProfessionals = PROFESSIONALS.filter(professional => {
+                if (!searchQuery) return true;
+                const query = searchQuery.toLowerCase();
+                return (
+                  professional.name.toLowerCase().includes(query) ||
+                  professional.role.toLowerCase().includes(query) ||
+                  professional.tags.some(tag => tag.toLowerCase().includes(query))
+                );
+              });
+
+              if (filteredProfessionals.length === 0) {
+                return (
+                  <div className="col-span-full text-center py-20">
+                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Search className="w-8 h-8 text-slate-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2">No experts found</h3>
+                    <p className="text-slate-500">Try adjusting your search terms</p>
+                  </div>
+                );
+              }
+
+              return filteredProfessionals.map((professional, index) => (
+                <motion.div
+                  key={professional.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                >
+                  <AvatarCard professional={professional} />
+                </motion.div>
+              ))
+            })()}
           </div>
 
           <div className="mt-20 text-center">

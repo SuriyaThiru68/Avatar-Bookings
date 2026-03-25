@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
+import AppointmentPage from "@/pages/appointment";
 import BookingPage from "@/pages/booking";
 import SuccessPage from "@/pages/success";
 import AuthPage from "@/pages/auth";
@@ -17,6 +18,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/appointment" component={AppointmentPage} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/profile" component={ProfilePage} />
       <Route path="/bookings" component={BookingsPage} />
@@ -26,6 +28,8 @@ function Router() {
     </Switch>
   );
 }
+
+
 
 function App() {
   return (

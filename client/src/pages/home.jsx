@@ -2,12 +2,8 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { useAuth } from "@/contexts/AuthContext";
-import { AvatarCard } from "@/components/avatar-card";
 import { Button } from "@/components/ui/button";
-import { Search, SlidersHorizontal, Sparkles, ShieldCheck, Users, Zap, Star, ArrowRight, User, Calendar } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Mic, Speech, Building2, User, ChevronRight, Activity, CalendarDays, CheckCircle2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,110 +12,68 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import heroBg from "../assets/hero-bg.png";
-import avatar1 from "../assets/avatar-1.png";
-import avatar2 from "../assets/avatar-2.png";
-import avatar3 from "../assets/avatar-3.png";
-
-const PROFESSIONALS = [
-  {
-    id: "1",
-    name: "Dr. Sarah Chen",
-    role: "Clinical Psychologist",
-    image: avatar1,
-    rating: 4.9,
-    reviews: 124,
-    availability: "Today, 2:00 PM",
-    tags: ["Anxiety", "Stress", "Mindfulness"]
-  },
-  {
-    id: "2",
-    name: "Marcus Reynolds",
-    role: "Creative Director",
-    image: avatar2,
-    rating: 5,
-    reviews: 89,
-    availability: "Tomorrow, 10:00 AM",
-    tags: ["Branding", "Design", "Strategy"]
-  },
-  {
-    id: "3",
-    name: "Elena Rodriguez",
-    role: "Executive Coach",
-    image: avatar3,
-    rating: 4.8,
-    reviews: 215,
-    availability: "Wed, 9:00 AM",
-    tags: ["Leadership", "Career", "Management"]
-  }
-];
-
-const STATS = [
-  { label: "Active Experts", value: "500+", icon: Users },
-  { label: "Successful Sessions", value: "12k+", icon: Zap },
-  { label: "Client Satisfaction", value: "98%", icon: Star },
-  { label: "Verified Profiles", value: "100%", icon: ShieldCheck }
-];
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export default function Home() {
   const [, setLocation] = useLocation();
   const { user, logout } = useAuth();
-  const [searchQuery, setSearchQuery] = React.useState('');
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FCFDFD] font-sans selection:bg-teal-200">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => setLocation('/')}>
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setLocation('/')}>
+            <div className="w-10 h-10 bg-teal-900 rounded-full flex items-center justify-center shadow-lg shadow-teal-900/20">
+              <span className="text-white font-bold text-lg">+</span>
             </div>
-            <span className="font-display font-bold text-xl tracking-tight text-slate-900">ProConnect</span>
+            <span className="font-extrabold text-xl tracking-tight text-slate-900">
+              Central Health Plaza
+              <span className="block text-[10px] uppercase tracking-widest text-teal-600">Medical Network</span>
+            </span>
           </div>
 
-          <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => document.getElementById('experts')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Find Experts</button>
-            <button onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">How it Works</button>
-            <button onClick={() => document.getElementById('business')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">For Business</button>
+          <div className="hidden md:flex items-center gap-8 font-semibold text-slate-500">
+            <button className="hover:text-teal-800 transition-colors">Find a Doctor</button>
+            <button className="hover:text-teal-800 transition-colors">Specialties</button>
+            <button className="hover:text-teal-800 transition-colors">AI Concierge</button>
+            <button className="hover:text-teal-800 transition-colors">For Clinics</button>
           </div>
 
           <div className="flex items-center gap-4">
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                    <Avatar>
-                      <AvatarFallback className="bg-primary text-white">
+                  <Button variant="ghost" className="relative h-12 w-12 rounded-full ring-2 ring-slate-100">
+                    <Avatar className="h-full w-full">
+                      <AvatarFallback className="bg-teal-50 text-teal-800 font-bold">
                         {user.username?.charAt(0).toUpperCase() || 'U'}
                       </AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuContent align="end" className="w-56 p-2 rounded-2xl border-slate-100 shadow-xl">
+                  <DropdownMenuLabel className="font-bold text-slate-800">My Medical Profile</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setLocation('/profile')}>
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
+                  <DropdownMenuItem className="py-2.5 font-medium cursor-pointer" onClick={() => setLocation('/appointment')}>
+                    <Mic className="mr-3 h-4 w-4 text-teal-600" /> AI Assistant
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLocation('/bookings')}>
-                    <Calendar className="mr-2 h-4 w-4" />
-                    My Bookings
+                  <DropdownMenuItem className="py-2.5 font-medium cursor-pointer" onClick={() => setLocation('/bookings')}>
+                    <CalendarDays className="mr-3 h-4 w-4 text-slate-400" /> My Appointments
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout}>
-                    Logout
+                  <DropdownMenuItem className="py-2.5 font-medium text-rose-600 cursor-pointer" onClick={logout}>
+                    Secure Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" className="hidden sm:inline-flex" onClick={() => setLocation('/auth')}>
-                  Log In
+                <Button variant="ghost" className="hidden sm:inline-flex text-slate-600 font-bold hover:bg-slate-50 rounded-xl" onClick={() => setLocation('/auth')}>
+                  Patient Login
                 </Button>
-                <Button className="rounded-full shadow-lg shadow-primary/20" onClick={() => setLocation('/auth')}>
-                  Join Now
+                <Button className="rounded-full bg-teal-800 hover:bg-teal-900 shadow-lg shadow-teal-900/20 px-8 h-12 font-bold text-white transition-all hover:scale-105" onClick={() => setLocation('/auth')}>
+                  Join Network
                 </Button>
               </>
             )}
@@ -128,254 +82,115 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-48 overflow-hidden bg-slate-50">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={heroBg}
-            alt="Background"
-            className="w-full h-full object-cover opacity-40 mix-blend-multiply"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/80 to-white" />
-        </div>
+      <section className="relative pt-40 pb-32 overflow-hidden items-center justify-center flex flex-col">
+        {/* Background Decorative Blobs */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal-50/50 rounded-full blur-[120px] -z-10" />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-4xl mx-auto text-center"
+        <div className="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-20">
+          
+          <motion.div 
+             initial={{ opacity: 0, x: -30 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ duration: 0.6 }}
+             className="flex-1 max-w-2xl"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Badge variant="secondary" className="mb-8 px-4 py-1.5 bg-primary/10 text-primary border-primary/20 text-sm font-semibold rounded-full">
-                <Sparkles className="w-3.5 h-3.5 mr-2" />
-                Next Generation Consultation
-              </Badge>
-            </motion.div>
-
-            <h1 className="font-display font-black text-6xl md:text-8xl text-slate-900 mb-8 leading-[0.95] tracking-tight">
-              Connect with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-500 to-violet-600">
-                the best.
-              </span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-teal-100 shadow-sm text-teal-800 font-bold text-xs uppercase tracking-widest mb-8">
+              <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" /> Live AI Scheduling 
+            </div>
+            
+            <h1 className="font-extrabold text-6xl lg:text-7xl text-slate-900 mb-8 leading-[1.1] tracking-tight">
+              Meet your personal <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-800">Medical Concierge.</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-              Book 1-on-1 sessions with world-class professionals. Expert guidance whenever you need it.
+            <p className="text-xl text-slate-500 font-medium leading-relaxed mb-12 max-w-xl">
+              Skip the waiting queues and hold music. Talk directly to our ultra-realistic AI assistant to instantly find top specialists and book appointments completely hands-free.
             </p>
 
-            <div className="max-w-2xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4 bg-white p-2 rounded-3xl sm:rounded-full shadow-2xl shadow-slate-200 border border-slate-100">
-                <div className="flex-1 flex items-center px-4">
-                  <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
-                  <Input
-                    placeholder="Search by role, name or specialty..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="border-none shadow-none focus-visible:ring-0 bg-transparent text-lg h-12 w-full"
-                  />
-                </div>
-                <Button onClick={() => document.getElementById('experts')?.scrollIntoView({ behavior: 'smooth' })} className="h-12 rounded-2xl sm:rounded-full px-10 text-lg font-bold shadow-lg shadow-primary/30">
-                  Search Experts
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-2 mt-6">
-                <span className="text-sm text-slate-400 font-medium mr-2">Popular:</span>
-                {["Psychology", "UI Design", "Career Growth", "Crypto", "Wellness"].map((tag) => (
-                  <button key={tag} className="text-xs font-bold px-3 py-1 bg-slate-100 hover:bg-primary/10 hover:text-primary rounded-full transition-all text-slate-500">
-                    {tag}
-                  </button>
-                ))}
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                 onClick={() => setLocation(user ? '/appointment' : '/auth')}
+                 className="h-16 rounded-full px-10 bg-teal-800 hover:bg-teal-900 text-white font-bold text-lg shadow-[0_10px_40px_rgba(15,118,110,0.3)] transition-transform hover:scale-105"
+              >
+                {user ? "Talk to Assistant Now" : "Get Started"} <Mic className="ml-3 w-5 h-5" />
+              </Button>
+              <Button 
+                variant="outline"
+                className="h-16 rounded-full px-10 border-2 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold text-lg"
+              >
+                View Specialists
+              </Button>
             </div>
           </motion.div>
+
+          <motion.div 
+             initial={{ opacity: 0, scale: 0.9 }}
+             animate={{ opacity: 1, scale: 1 }}
+             transition={{ duration: 0.8, delay: 0.1 }}
+             className="flex-1 w-full max-w-xl relative"
+          >
+             {/* Floating UI Elements mocking the app */}
+             <div className="absolute top-10 -left-16 bg-white p-4 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.06)] border border-slate-50 flex items-center gap-4 z-20 animate-bounce" style={{animationDuration: '3s'}}>
+                 <div className="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600"><Speech className="w-6 h-6" /></div>
+                 <div>
+                    <div className="w-24 h-2 bg-slate-100 rounded-full mb-2" />
+                    <div className="w-16 h-2 bg-teal-500 rounded-full" />
+                 </div>
+             </div>
+
+             <div className="relative w-[500px] h-[500px] rounded-full mx-auto border-[16px] border-white shadow-[0_30px_100px_rgba(15,118,110,0.15)] overflow-hidden bg-slate-900 group cursor-pointer" onClick={() => setLocation(user ? '/appointment' : '/auth')}>
+                 <div className="absolute inset-0 bg-teal-900/40 mix-blend-multiply group-hover:bg-transparent transition-colors z-10" />
+                 <img src="/ai_receptionist.png" alt="AI Receptionist" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
+                 
+                 {/* Decorative soundwaves */}
+                 <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                     {[...Array(6)].map((_, i) => (
+                         <div key={i} className="w-2 h-10 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: `${i * 0.15}s` }} />
+                     ))}
+                 </div>
+             </div>
+
+             <div className="absolute bottom-20 -right-8 bg-white p-5 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-50 flex items-center gap-4 z-20">
+                 <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600"><CheckCircle2 className="w-5 h-5" /></div>
+                 <div>
+                    <p className="font-bold text-slate-800 text-sm">Appointment Booked</p>
+                    <p className="text-slate-400 font-medium text-xs">Tomorrow, 10:30 AM</p>
+                 </div>
+             </div>
+          </motion.div>
+
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-24 bg-white relative">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {STATS.map((stat, idx) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center mx-auto mb-4 text-primary">
-                  <stat.icon className="w-6 h-6" />
-                </div>
-                <div className="text-4xl font-black text-slate-900 mb-1">{stat.value}</div>
-                <div className="text-sm font-semibold text-slate-400 uppercase tracking-widest">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+      {/* Features Grid */}
+      <section className="py-24 bg-white border-t border-slate-100">
+         <div className="container mx-auto px-6">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+               <h2 className="text-3xl font-bold text-slate-900 mb-4">Precision Healthcare, Simplified.</h2>
+               <p className="text-lg text-slate-500 font-medium">Experience the future of medical coordination with our fully autonomous, emotion-aware voice assistant system.</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+               <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-shadow">
+                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-teal-600 mb-6 shadow-sm"><Speech className="w-7 h-7" /></div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">Natural Conversation</h3>
+                  <p className="text-slate-500 font-medium leading-relaxed mb-6">Built on advanced NLP and ultra-realistic TTS, our agent guides you perfectly through managing your health data.</p>
+                  <span className="text-teal-700 font-bold text-sm flex items-center cursor-pointer hover:underline">Learn more <ChevronRight className="w-4 h-4 ml-1" /></span>
+               </div>
+               <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-shadow">
+                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-teal-600 mb-6 shadow-sm"><Building2 className="w-7 h-7" /></div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">Central Plaza Network</h3>
+                  <p className="text-slate-500 font-medium leading-relaxed mb-6">Seamless integration directly into over 5,000 local clinics and top-rated medical professionals in your area.</p>
+                  <span className="text-teal-700 font-bold text-sm flex items-center cursor-pointer hover:underline">View clinics <ChevronRight className="w-4 h-4 ml-1" /></span>
+               </div>
+               <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-shadow">
+                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-teal-600 mb-6 shadow-sm"><Activity className="w-7 h-7" /></div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">Instant Confirmations</h3>
+                  <p className="text-slate-500 font-medium leading-relaxed mb-6">No more waiting for callbacks. The AI checks our live database and locks in your preferred time slot immediately.</p>
+                  <span className="text-teal-700 font-bold text-sm flex items-center cursor-pointer hover:underline">How it works <ChevronRight className="w-4 h-4 ml-1" /></span>
+               </div>
+            </div>
+         </div>
       </section>
-
-      {/* Experts Section */}
-      <section id="experts" className="py-24 bg-slate-50/50">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div className="max-w-xl">
-              <h2 className="text-4xl md:text-5xl font-display font-black text-slate-900 mb-4 tracking-tight">
-                Available Experts
-              </h2>
-              <p className="text-lg text-slate-500 font-medium">
-                Browse our hand-picked selection of top-rated professionals ready to help you grow.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" className="rounded-xl border-slate-200 font-bold">
-                <SlidersHorizontal className="w-4 h-4 mr-2" /> Filters
-              </Button>
-              <Button variant="outline" className="rounded-xl border-slate-200 font-bold">
-                Most Recent
-              </Button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {(() => {
-              const filteredProfessionals = PROFESSIONALS.filter(professional => {
-                if (!searchQuery) return true;
-                const query = searchQuery.toLowerCase();
-                return (
-                  professional.name.toLowerCase().includes(query) ||
-                  professional.role.toLowerCase().includes(query) ||
-                  professional.tags.some(tag => tag.toLowerCase().includes(query))
-                );
-              });
-
-              if (filteredProfessionals.length === 0) {
-                return (
-                  <div className="col-span-full text-center py-20">
-                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Search className="w-8 h-8 text-slate-400" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2">No experts found</h3>
-                    <p className="text-slate-500">Try adjusting your search terms</p>
-                  </div>
-                );
-              }
-
-              return filteredProfessionals.map((professional, index) => (
-                <motion.div
-                  key={professional.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                >
-                  <AvatarCard professional={professional} />
-                </motion.div>
-              ))
-            })()}
-          </div>
-
-          <div className="mt-20 text-center">
-            <Button onClick={() => window.scrollTo({ top: document.getElementById('experts')?.offsetTop - 100, behavior: 'smooth' })} variant="ghost" className="text-primary font-black text-lg group">
-              View All 250+ Experts <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-32 bg-slate-900 overflow-hidden relative">
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/20 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-500/20 blur-[120px] rounded-full" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary/10 to-transparent p-12 md:p-20 rounded-[4rem] border border-white/10 backdrop-blur-sm text-center">
-            <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-8 tracking-tight">
-              Ready to start your <br />journey today?
-            </h2>
-            <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto font-medium">
-              Join thousands of people who are already growing with our elite professional network.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button onClick={() => setLocation('/auth')} size="lg" className="h-16 px-12 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/40">
-                Get Started for Free
-              </Button>
-              <Button onClick={() => document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' })} size="lg" variant="outline" className="h-16 px-12 text-xl font-bold rounded-2xl border-white/20 text-white hover:bg-white/5 transition-all">
-                Talk to Sales
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-20 bg-white border-t border-slate-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-20">
-            <div className="col-span-2">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <span className="font-display font-bold text-xl tracking-tight text-slate-900">ProConnect</span>
-              </div>
-              <p className="text-slate-500 font-medium leading-relaxed max-w-xs mb-8">
-                Connecting global talent with personalized 1-on-1 consultation and mentorship.
-              </p>
-              <div className="flex gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-10 h-10 bg-slate-100 rounded-full hover:bg-primary/10 hover:text-primary transition-all cursor-pointer" />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-slate-900 mb-6 uppercase tracking-widest text-xs">Platform</h4>
-              <ul className="space-y-4 text-sm font-medium text-slate-500">
-                <li><button onClick={() => document.getElementById('experts')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Find Experts</button></li>
-                <li><button onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">How it Works</button></li>
-                <li><button onClick={() => setLocation('/auth')} className="hover:text-primary transition-colors">Pricing</button></li>
-                <li><button onClick={() => setLocation('/auth')} className="hover:text-primary transition-colors">Mobile App</button></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-slate-900 mb-6 uppercase tracking-widest text-xs">Company</h4>
-              <ul className="space-y-4 text-sm font-medium text-slate-500">
-                <li><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-primary transition-colors">About Us</button></li>
-                <li><button onClick={() => setLocation('/auth')} className="hover:text-primary transition-colors">Careers</button></li>
-                <li><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-primary transition-colors">Success Stories</button></li>
-                <li><button onClick={() => document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Contact</button></li>
-              </ul>
-            </div>
-
-            <div className="col-span-2">
-              <h4 className="font-bold text-slate-900 mb-6 uppercase tracking-widest text-xs">Newsletter</h4>
-              <p className="text-sm text-slate-500 mb-4 font-medium">
-                Get the latest expert insights and platform updates.
-              </p>
-              <div className="flex gap-2">
-                <Input placeholder="Email address" className="bg-slate-50 border-none rounded-xl h-12" />
-                <Button className="h-12 rounded-xl font-bold">Join</Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-sm font-medium text-slate-400">© 2026 ProConnect Inc. All rights reserved.</p>
-            <div className="flex gap-8 text-sm font-medium text-slate-400">
-              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Privacy Policy</button>
-              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Terms of Service</button>
-              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Cookie Settings</button>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

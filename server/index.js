@@ -4,17 +4,13 @@ import { registerRoutes } from "./routes.js";
 import { serveStatic } from "./static.js";
 import { createServer } from "http";
 import authRoutes from "./routes/auth.js";
+import aiRoutes from "./routes/ai.js";
+import { connectMongo } from "./mongo.js";
 
 const app = express();
 const httpServer = createServer(app);
 
-app.use(
-  express.json({
-    verify: (req, _res, buf) => {
-      req.rawBody = buf;
-    }
-  })
-);
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Session middleware
@@ -31,8 +27,13 @@ app.use(
   })
 );
 
+// Connect to MongoDB
+connectMongo();
+
 // Auth routes
 app.use("/api/auth", authRoutes);
+// AI Assistant routes
+app.use("/api/ai", aiRoutes);
 function log(message, source = "express") {
   const formattedTime = (/* @__PURE__ */ new Date()).toLocaleTimeString("en-US", {
     hour: "numeric",
